@@ -32,20 +32,28 @@ public class QuestionMainController extends HttpServlet {
         String url = ERROR;
         try {
             String action = request.getParameter("action");
-            if (action.equals("Search")) {
-                url = SEARCH;
-            } else if (action.equals("Create")) {
-                url = CREATE;
-            } else if (action.equals("Insert")) {
-                url = EDIT;
-            } else if (action.equals("Edit")) {
-                url = EDIT;
-            } else if (action.equals("Update")) {
-                url = UPDATE;
-            } else if (action.equals("Delete")) {
-                url = DELETE;
-            } else {
-                request.setAttribute("ERROR", "Invalid action!!!");
+            switch (action) {
+                case "Search":
+                    url = SEARCH;
+                    break;
+                case "Create":
+                    url = CREATE;
+                    break;
+                case "Insert":
+                    url = EDIT;
+                    break;
+                case "Edit":
+                    url = EDIT;
+                    break;
+                case "Update":
+                    url = UPDATE;
+                    break;
+                case "Delete":
+                    url = DELETE;
+                    break;
+                default:
+                    request.setAttribute("ERROR", "Invalid action!!!");
+                    break;
             }
         } catch (Exception e) {
             log("ERROR at QuestionMainController: " + e.getMessage());

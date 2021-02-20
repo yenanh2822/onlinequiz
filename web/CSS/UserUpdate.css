@@ -209,13 +209,11 @@ iframe {
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    background: #f2f2f2;
-
 }
 
 .wrap-contact100 {
     width: 100%;
-    background: #fff;
+    background: linear-gradient(45deg, #4158d0, #c850c0);
     overflow: hidden;
     display: -webkit-box;
     display: -webkit-flex;
@@ -224,8 +222,6 @@ iframe {
     display: flex;
     flex-wrap: wrap;
     align-items: stretch;
-    flex-direction: row-reverse;
-
 }
 
 /*==================================================================
@@ -262,6 +258,9 @@ iframe {
     min-height: 100vh;
     display: block;
     padding: 110px 55px 55px 55px;
+    align-self: center;
+    margin: auto;
+    background: white;
 }
 
 .contact100-form-title {

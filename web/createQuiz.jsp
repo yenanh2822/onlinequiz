@@ -123,13 +123,10 @@
                     <div class="container-contact100-form-btn">
                         <input type="hidden" name="role" value="${sessionScope.role}"/>
                         <button class="contact100-form-btn" type="submit" name="action" value="Create" onclick="return checkId()">
-                            Update
+                            Create
                         </button>
                     </div>
                 </form>
-
-                <div class="contact100-more flex-col-c-m" style="background-image: url('Image/bg-01.jpg');">
-                </div>
             </div>
         </div>
 

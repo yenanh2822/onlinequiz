@@ -30,10 +30,6 @@ public class LogoutController extends HttpServlet {
         try {
             HttpSession session = request.getSession(false);
             if (session != null) {
-//                session.setAttribute("SUBJECT", null);
-//                session.setAttribute("Username", null);
-//                session.setAttribute("Fullname", null);
-//                session.setAttribute("Role", null);
                 session.invalidate();
             }
         } catch (Exception e) {

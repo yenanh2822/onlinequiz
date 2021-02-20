@@ -25,7 +25,6 @@ public class LoginController extends HttpServlet {
 
     private static final String ERROR = "index.jsp";
     private static final String ADMIN = "admin.jsp";
-
     private static final String VERIFY = "verify.jsp";
     private static final Logger LOGGER = Logger.getLogger(LoginController.class);
 
@@ -33,48 +32,51 @@ public class LoginController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
-        String fullname = null;
+        String fullname;
         try {
             String username = request.getParameter("txtUsername");
             String password = request.getParameter("txtPassword");
             RegistrationDAO dao = new RegistrationDAO();
             String role = dao.checkLogin(username, password);
             String status = dao.checkStatus(username);
-            if (role.equals("failed")) {
-                url = ERROR;
-                request.setAttribute("ERROR", "Invalid Username or Password!!!");
-                request.setAttribute("Username", username);
-            } else if (role.equals("admin")) {
-                HttpSession session = request.getSession();
-                fullname = dao.getFullname(username);
-                QuestionDAO questDao = new QuestionDAO();
-                List<SubjectDTO> subList = questDao.getSubject();
-                session.setAttribute("SUBJECT", subList);
-                session.setAttribute("Fullname", fullname);
-                session.setAttribute("Username", username);
-                session.setAttribute("Role", role);
-                url = ADMIN;
-            } else if (role.equals("student")) {
-                if (status.equals("Active")) {
-                    HttpSession session = request.getSession();
+            HttpSession session = request.getSession();
+            QuestionDAO questDao = new QuestionDAO();
+            List<SubjectDTO> subList;
+            switch (role) {
+                case "failed":
+                    url = ERROR;
+                    request.setAttribute("ERROR", "Invalid Username or Password!!!");
+                    request.setAttribute("Username", username);
+                    break;
+                case "admin":
                     fullname = dao.getFullname(username);
-                    QuestionDAO questDao = new QuestionDAO();
-                    List<SubjectDTO> subList = questDao.getSubject();
+                    subList = questDao.getSubject();
                     session.setAttribute("SUBJECT", subList);
-                    session.setAttribute("Username", username);
                     session.setAttribute("Fullname", fullname);
+                    session.setAttribute("Username", username);
                     session.setAttribute("Role", role);
                     url = ADMIN;
-                } else if (status.equals("New")) {
-                    url = VERIFY;
-                } else {
-                    url = "error.jsp";
-                }
-            } else {
-                request.setAttribute("ERROR", "Your role is invalid");
+                    break;
+                case "student":
+                    switch (status) {
+                        case "New":
+                            fullname = dao.getFullname(username);
+                            subList = questDao.getSubject();
+                            session.setAttribute("SUBJECT", subList);
+                            session.setAttribute("Username", username);
+                            session.setAttribute("Fullname", fullname);
+                            session.setAttribute("Role", role);
+                            url = ADMIN;
+                            break;
+                        default:
+                            url = "error.jsp";
+                            break;
+                    }   break;
+                default:
+                    request.setAttribute("ERROR", "Your role is invalid");
+                    break;
             }
         } catch (Exception e) {
-//            log("ERROR at LoginController: " + e.getMessage());
             LOGGER.error("ERROR at LoginController: " + e.getMessage());
 
         } finally {

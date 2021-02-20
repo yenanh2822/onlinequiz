@@ -41,14 +41,21 @@ public class CreateQuestionController extends HttpServlet {
             String ans4 = request.getParameter("txtAnswer4");
             String correct = request.getParameter("txtCorrect");
             String correctAns = "";
-            if (correct.equals("Answer 1")) {
-                correctAns = ans1;
-            } else if (correct.equals("Answer 2")) {
-                correctAns = ans2;
-            } else if (correct.equals("Answer 3")) {
-                correctAns = ans3;
-            } else if (correct.equals("Answer 4")) {
-                correctAns = ans4;
+            switch (correct) {
+                case "Answer 1":
+                    correctAns = ans1;
+                    break;
+                case "Answer 2":
+                    correctAns = ans2;
+                    break;
+                case "Answer 3":
+                    correctAns = ans3;
+                    break;
+                case "Answer 4":
+                    correctAns = ans4;
+                    break;
+                default:
+                    break;
             }
             String status = request.getParameter("txtStatus");
             boolean questStatus = true;

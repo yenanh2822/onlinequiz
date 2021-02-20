@@ -148,9 +148,6 @@
                         </button>
                     </div>
                 </form>
-
-                <div class="contact100-more flex-col-c-m" style="background-image: url('Image/bg-01.jpg');">
-                </div>
             </div>
         </div>
 

@@ -50,20 +50,32 @@ public class SearchQuestionController extends HttpServlet {
                         page = total;
                     }
                 }
-                if (category.equals("Question Name")) {
-                    result = dao.getQuestionByName(search, page);
-                } else if (category.equals("Status")) {
-                    result = dao.getQuestionByStatus(search, page);
-                } else if (category.equals("Subject")) {
-                    result = dao.getQuestionBySubject(search, page);
+                switch (category) {
+                    case "Question Name":
+                        result = dao.getQuestionByName(search, page);
+                        break;
+                    case "Status":
+                        result = dao.getQuestionByStatus(search, page);
+                        break;
+                    case "Subject":
+                        result = dao.getQuestionBySubject(search, page);
+                        break;
+                    default:
+                        break;
                 }
             } else {
-                if (category.equals("Question Name")) {
-                    result = dao.getQuestionByName(search, count);
-                } else if (category.equals("Status")) {
-                    result = dao.getQuestionByStatus(search, count);
-                } else if (category.equals("Subject")) {
-                    result = dao.getQuestionBySubject(search, count);
+                switch (category) {
+                    case "Question Name":
+                        result = dao.getQuestionByName(search, count);
+                        break;
+                    case "Status":
+                        result = dao.getQuestionByStatus(search, count);
+                        break;
+                    case "Subject":
+                        result = dao.getQuestionBySubject(search, count);
+                        break;
+                    default:
+                        break;
                 }
             }
             request.setAttribute("LIST", result);

@@ -35,24 +35,34 @@ public class MainController extends HttpServlet {
         String url = ERROR;
         try {
             String action = request.getParameter("action");
-            if (action.equals("Login")) {
-                url = LOGIN;
-            } else if (action.equals("Register")) {
-                url = REGISTER;
-            } else if (action.equals("Insert")) {
-                url = INSERT;
-            } else if (action.equals("Update")) {
-                url = UPDATE;
-            } else if (action.equals("Edit")) {
-                url = EDIT;
-            } else if (action.equals("Search")) {
-                url = SEARCH;
-            } else if (action.equals("Verify")) {
-                url = VERIFY;
-            } else if (action.equals("Delete")) {
-                url = DELETE;
-            } else {
-                request.setAttribute("ERROR", "Your action is invalid");
+            switch (action) {
+                case "Login":
+                    url = LOGIN;
+                    break;
+                case "Register":
+                    url = REGISTER;
+                    break;
+                case "Insert":
+                    url = INSERT;
+                    break;
+                case "Update":
+                    url = UPDATE;
+                    break;
+                case "Edit":
+                    url = EDIT;
+                    break;
+                case "Search":
+                    url = SEARCH;
+                    break;
+                case "Verify":
+                    url = VERIFY;
+                    break;
+                case "Delete":
+                    url = DELETE;
+                    break;
+                default:
+                    request.setAttribute("ERROR", "Your action is invalid");
+                    break;
             }
 
         } catch (Exception e) {

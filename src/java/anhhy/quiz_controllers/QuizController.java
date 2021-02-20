@@ -30,10 +30,8 @@ public class QuizController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = DOING;
-        List<String> result = null;
-//        List<String> answerList = null;
-//        List<String> answer = null;
-        String[] answer = null;
+        List<String> result;
+        String[] answer;
         try {
             String id = request.getParameter("txtId");
             String name = request.getParameter("txtName");
@@ -96,8 +94,8 @@ public class QuizController extends HttpServlet {
                 }
 
                 int count = 0;
-                for (int i = 0; i < answer.length; i++) {
-                    if (answer[i] != "" && answer[i] != null) {
+                for (String answer1 : answer) {
+                    if (!"".equals(answer1) && answer1 != null) {
                         count++;
                     }
                 }

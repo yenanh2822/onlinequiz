@@ -10,14 +10,10 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Take Quiz</title>
         <link href="CSS/Quiz.css" rel="stylesheet" />
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-        <script src="vendor/jquery/jquery-3.2.1.min.js"></script>
-        <style>
-
-        </style>
-
+        <script src="vendor/jquery/jquery-3.2.1.min.js"></script
     </head>
     <body>
         <div class="container-fluid bg-info" style="height: 790px">
@@ -60,8 +56,6 @@
                         <c:if test="${requestScope.Count >= Total}">
                             <input id="submit" style="float: right; margin: 10px; padding: 5px 20px 5px 20px" type="submit" name="action" value="Submit"/>
                         </c:if>
-
-
                     </form>
 
 
@@ -131,16 +125,9 @@
                                 $("#submit").trigger("click");
                             }
                         }, 1000);
-
-
-
                     </script>
                 </div>
-
             </div>
-
         </div>
     </body>
-
-
 </html>

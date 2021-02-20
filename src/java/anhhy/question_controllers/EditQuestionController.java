@@ -39,7 +39,6 @@ public class EditQuestionController extends HttpServlet {
                 request.setAttribute("LIST", subjectList); // Send the list to "updateQuiz.jsp"
                 url = CREATE;
             } else if (action.equals("Edit")) {
-                // Get PARAMETER from "userlist.jsp"
                 String search = request.getParameter("txtSearch");
                 String category = request.getParameter("txtChoice");
                 String id = request.getParameter("txtId");

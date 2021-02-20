@@ -15,21 +15,19 @@
         <link href="https://fonts.googleapis.com/css?family=Montserrat:700,900" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Open+Sans+Condensed:wght@300&display=swap" rel="stylesheet">
     </head>
-    <body>
+    <body style="margin-top: 0">
         <main id="cd-main-content">
+            <header class="cd-header">
+                <div id="cd-logo" style="border-style: solid; border-color: #FFF; padding-top: 4px;"><a href="LogoutController">LOGOUT</a></div>
+                <c:if test="${sessionScope.Role == 'admin'}">
+                    <a class="cd-menu-trigger" href="#main-nav" style="border-style: solid; border-color: #FFF;">Manage Question<span></span></a>
+                </c:if>
+                <c:if test="${sessionScope.Role == 'student'}">
+                    <a class="cd-menu-trigger" href="#main-nav" style="border-style: solid; border-color: #FFF;">Manage Quiz<span></span></a>
+                </c:if>
+            </header>
             <section id="cd-intro">
                 <h1 style="font-family: 'Josefin Sans', sans-serif; font-size: 35px">Welcome, ${sessionScope.Fullname}</h1>
-
-                <header class="cd-header">
-                    <div id="cd-logo" style="border-style: solid; border-color: #FFF; padding-top: 4px;"><a href="LogoutController">LOGOUT</a></div>
-                    <c:if test="${sessionScope.Role == 'admin'}">
-                        <a class="cd-menu-trigger" href="#main-nav" style="border-style: solid; border-color: #FFF;">Manage Question<span></span></a>
-                    </c:if>
-                    <c:if test="${sessionScope.Role == 'student'}">
-                        <a class="cd-menu-trigger" href="#main-nav" style="border-style: solid; border-color: #FFF;">Manage Quiz<span></span></a>
-                    </c:if>
-
-                </header>
                 <div class="cd-blurred-bg"></div>
             </section> <!-- cd-intro -->
         </main>
@@ -37,16 +35,16 @@
         <div class="cd-shadow-layer"></div>
 
         <nav id="main-nav">
-            <ul style="background-image: url('https://www.pixel4k.com/wp-content/uploads/2018/10/starry-night-sky-evening-blue-landscape-4k_1540144784.jpg'); background-position: center; color: #FFF;">
+            <ul style="background-position: center; color: black;">
                 <c:if test="${sessionScope.Role == 'admin'}">
                     <%-- GET "Username" and "Role" from LOGIN, NOTIFICATION Controller => to give PERMISSION access to MENU's elements --%>
                     <li style="list-style-type: none;"><a href="searchQuiz.jsp" style="font-family: 'Josefin Sans', sans-serif;"><span>SEARCH</span></a></li>
-                    <li style="list-style-type: none;"><a href="QuestionMainController?action=Insert" style="color: #FFF; font-family: 'Josefin Sans', sans-serif;"><span>CREATE</span></a></li>
-                    <li style="list-style-type: none;"><a href="searchQuiz.jsp" style="font-family: 'Josefin Sans', sans-serif;color: #FFF;"><span>UPDATE</span></a></li>
-                    <li style="list-style-type: none;"><a href="searchQuiz.jsp" style="font-family: 'Josefin Sans', sans-serif;color: #FFF;"><span>DELETE</span></a></li>
+                    <li style="list-style-type: none;"><a href="QuestionMainController?action=Insert" style="color: #000; font-family: 'Josefin Sans', sans-serif;"><span>CREATE</span></a></li>
+                    <li style="list-style-type: none;"><a href="searchQuiz.jsp" style="font-family: 'Josefin Sans', sans-serif;color: #000;"><span>UPDATE</span></a></li>
+                    <li style="list-style-type: none;"><a href="searchQuiz.jsp" style="font-family: 'Josefin Sans', sans-serif;color: #000;"><span>DELETE</span></a></li>
                     </c:if>
                     <c:if test="${sessionScope.Role == 'student'}">
-                    <li style="list-style-type: none;"><a href="quiz.jsp"style="font-family: 'Josefin Sans', sans-serif;color: #FFF;"><span>Take Quiz</span></a></li>
+                    <li style="list-style-type: none;"><a href="quiz.jsp"style="font-family: 'Josefin Sans', sans-serif;color: #000;"><span>Take Quiz</span></a></li>
                     </c:if>
             </ul>
             <a href="#0" class="cd-close-menu">Close<span></span></a>

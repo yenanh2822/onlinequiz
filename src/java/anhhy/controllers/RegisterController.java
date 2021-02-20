@@ -30,15 +30,14 @@ public class RegisterController extends HttpServlet {
             String password = request.getParameter("txtPassword");
             String fullname = request.getParameter("txtFullname");
             RegistrationDAO dao = new RegistrationDAO();
-            String code = dao.randoms();
+            String code = RegistrationDAO.randoms();
             dto = new RegistrationDTO(username, password, fullname, code);
             dao.register(dto);
-            dao.sendMail("Java.Mail.CA@gmail.com", username, "Welcome to QuizOn", "Welcome to QuizOn. ", code);
         } catch (Exception e) {
             log("ERROR at RegisterController: " + e.getMessage());
-            if (e.getMessage().contains("duplicate")) { // IF Username of Registed User has existed, send "DUPLICATE MESSAGE" to ("index.jsp" or LOGIN PAGE)
+            if (e.getMessage().contains("duplicate")) {
                 request.setAttribute("ERROR", "Email has already existed");
-                request.setAttribute("DTO", dto); // Create a "DTO" => "REFILL" element boxes at ("index.jsp" or LOGIN PAGE)
+                request.setAttribute("DTO", dto);
             }
             LOGGER.error("ERROR at RegisterController: " + e.getMessage());
         } finally {

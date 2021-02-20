@@ -24,14 +24,9 @@ import javax.servlet.http.HttpSession;
  */
 public class RoleFilter implements Filter {
 
-    private static final boolean debug = true;
+    private static final boolean DEBUG = true;
     private static final String LOGIN = "/index.jsp";
     private static final String HOME = "/admin.jsp";
-//    private static final String
-//    private static final String
-//    private static final String
-//    private static final String
-//    private static final String
 
     // The filter configuration object we are associated with.  If
     // this value is null, this filter instance is not currently
@@ -43,7 +38,7 @@ public class RoleFilter implements Filter {
 
     private void doBeforeProcessing(ServletRequest request, ServletResponse response)
             throws IOException, ServletException {
-        if (debug) {
+        if (DEBUG) {
             log("RoleFilter:DoBeforeProcessing");
         }
 
@@ -71,7 +66,7 @@ public class RoleFilter implements Filter {
 
     private void doAfterProcessing(ServletRequest request, ServletResponse response)
             throws IOException, ServletException {
-        if (debug) {
+        if (DEBUG) {
             log("RoleFilter:DoAfterProcessing");
         }
 
@@ -94,6 +89,7 @@ public class RoleFilter implements Filter {
          */
     }
 
+    @Override
     public void doFilter(ServletRequest request, ServletResponse response,
             FilterChain chain)
             throws IOException, ServletException {
@@ -105,7 +101,7 @@ public class RoleFilter implements Filter {
         String uri = req.getRequestURI();
         String resource = uri.substring(uri.lastIndexOf("/") + 1);
         String action = req.getParameter("action");
-        if (role == null) {
+        if (null == role) {
             if (action == null) {
                 dispatcher = true;
                 url = LOGIN;
@@ -119,24 +115,27 @@ public class RoleFilter implements Filter {
                 dispatcher = true;
                 url = LOGIN;
             }
-        } else if (role.equals("admin")) {
-            if (resource.contains("quiz.jsp") || resource.contains("result.jsp") || resource.contains("takeQuiz.jsp")
-                    || resource.contains("QuizController") || resource.contains("QuizDetailController")
-                    || resource.contains("QuizMainController") || resource.contains("ResultController")
-                    || resource.contains("TakeQuizController") || resource.contains("VerifyController")
-                    || resource.contains("verify.jsp") || resource.contains("index.jsp")) {
-                dispatcher = true;
-                url = HOME;
-            }
-        } else if (role.equals("student")) {
-            if (resource.contains("CreateQuestionController") || resource.contains("DeleteQuestionController")
-                    || resource.contains("EditQuestionController") || resource.contains("QuestionMainController")
-                    || resource.contains("SearchQuestionController") || resource.contains("UpdateQuestionController")
-                    || resource.contains("searchQuiz.jsp") || resource.contains("createQuiz.jsp") || resource.contains("verify.jsp")
-                    || resource.contains("updateQuiz.jsp") || resource.contains("index.jsp") || resource.contains("VerifyController")) {
-                dispatcher = true;
-                url = HOME;
-            }
+        } else switch (role) {
+            case "admin":
+                if (resource.contains("quiz.jsp") || resource.contains("result.jsp") || resource.contains("takeQuiz.jsp")
+                        || resource.contains("QuizController") || resource.contains("QuizDetailController")
+                        || resource.contains("QuizMainController") || resource.contains("ResultController")
+                        || resource.contains("TakeQuizController") || resource.contains("VerifyController")
+                        || resource.contains("verify.jsp") || resource.contains("index.jsp")) {
+                    dispatcher = true;
+                    url = HOME;
+                }   break;
+            case "student":
+                if (resource.contains("CreateQuestionController") || resource.contains("DeleteQuestionController")
+                        || resource.contains("EditQuestionController") || resource.contains("QuestionMainController")
+                        || resource.contains("SearchQuestionController") || resource.contains("UpdateQuestionController")
+                        || resource.contains("searchQuiz.jsp") || resource.contains("createQuiz.jsp") || resource.contains("verify.jsp")
+                        || resource.contains("updateQuiz.jsp") || resource.contains("index.jsp") || resource.contains("VerifyController")) {
+                    dispatcher = true;
+                    url = HOME;
+                }   break;
+            default:
+                break;
         }
 
         if (resource.lastIndexOf(".jsp") > 0 || resource.lastIndexOf(".css") > 0 || resource.lastIndexOf(".js") > 0
@@ -160,6 +159,7 @@ public class RoleFilter implements Filter {
 
     /**
      * Return the filter configuration object for this filter.
+     * @return 
      */
     public FilterConfig getFilterConfig() {
         return (this.filterConfig);
@@ -177,16 +177,19 @@ public class RoleFilter implements Filter {
     /**
      * Destroy method for this filter
      */
+    @Override
     public void destroy() {
     }
 
     /**
      * Init method for this filter
+     * @param filterConfig
      */
+    @Override
     public void init(FilterConfig filterConfig) {
         this.filterConfig = filterConfig;
         if (filterConfig != null) {
-            if (debug) {
+            if (DEBUG) {
                 log("RoleFilter:Initializing filter");
             }
         }
@@ -200,7 +203,7 @@ public class RoleFilter implements Filter {
         if (filterConfig == null) {
             return ("RoleFilter()");
         }
-        StringBuffer sb = new StringBuffer("RoleFilter(");
+        StringBuilder sb = new StringBuilder("RoleFilter(");
         sb.append(filterConfig);
         sb.append(")");
         return (sb.toString());
@@ -212,26 +215,24 @@ public class RoleFilter implements Filter {
         if (stackTrace != null && !stackTrace.equals("")) {
             try {
                 response.setContentType("text/html");
-                PrintStream ps = new PrintStream(response.getOutputStream());
-                PrintWriter pw = new PrintWriter(ps);
-                pw.print("<html>\n<head>\n<title>Error</title>\n</head>\n<body>\n"); //NOI18N
-
-                // PENDING! Localize this for next official release
-                pw.print("<h1>The resource did not process correctly</h1>\n<pre>\n");
-                pw.print(stackTrace);
-                pw.print("</pre></body>\n</html>"); //NOI18N
-                pw.close();
-                ps.close();
+                try (PrintStream ps = new PrintStream(response.getOutputStream()); PrintWriter pw = new PrintWriter(ps)) {
+                    pw.print("<html>\n<head>\n<title>Error</title>\n</head>\n<body>\n"); //NOI18N
+                    
+                    // PENDING! Localize this for next official release
+                    pw.print("<h1>The resource did not process correctly</h1>\n<pre>\n");
+                    pw.print(stackTrace);
+                    pw.print("</pre></body>\n</html>"); //NOI18N
+                }
                 response.getOutputStream().close();
-            } catch (Exception ex) {
+            } catch (IOException ex) {
             }
         } else {
             try {
-                PrintStream ps = new PrintStream(response.getOutputStream());
-                t.printStackTrace(ps);
-                ps.close();
+                try (PrintStream ps = new PrintStream(response.getOutputStream())) {
+                    t.printStackTrace(ps);
+                }
                 response.getOutputStream().close();
-            } catch (Exception ex) {
+            } catch (IOException ex) {
             }
         }
     }
@@ -245,7 +246,7 @@ public class RoleFilter implements Filter {
             pw.close();
             sw.close();
             stackTrace = sw.getBuffer().toString();
-        } catch (Exception ex) {
+        } catch (IOException ex) {
         }
         return stackTrace;
     }

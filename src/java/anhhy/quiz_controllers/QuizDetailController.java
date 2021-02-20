@@ -31,7 +31,7 @@ public class QuizDetailController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
-        List<QuizDTO> result = new ArrayList<>();
+        List<QuizDTO> result;
         try {
             HttpSession session = request.getSession();
             String username = (String) session.getAttribute("Username");
@@ -69,13 +69,6 @@ public class QuizDetailController extends HttpServlet {
                 } else {
                     request.setAttribute("Count", page);
                 }
-//                long timeTaken = (result.get(page).getDoingDate().getTime() - result.get(page).getFinishDate().getTime());
-//                int hours = (int) (timeTaken % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60);
-//                int minutes = (int) (timeTaken % (1000 * 60 * 60)) / (1000 * 60);
-//                int seconds = (int) ((timeTaken % (1000 * 60)) / 1000);
-//                String time = (hours + ":" + minutes + ":" + seconds);
-//                
-//                request.setAttribute("TimeTaken", time);
                 request.setAttribute("HISTORY", result);
                 request.setAttribute("Total", total);
                 request.setAttribute("category", choice);

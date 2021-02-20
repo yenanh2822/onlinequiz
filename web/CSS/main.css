@@ -869,7 +869,7 @@ legend {
       justify-content: center;
   -ms-flex-align: center;
       align-items: center;
-  background: url("../Image/Searchs_012.png");
+  background: linear-gradient(45deg, #4158d0, #c850c0);
   background-size: cover;
   background-position: center center;
   padding: 15px;

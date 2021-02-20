@@ -13,6 +13,7 @@
         <meta charset="utf-8">
         <title>Login Page</title>
         <link rel="stylesheet" type="text/css" href="CSS/LoginCSS.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     </head>
     <body onload="checkDuplicate(); checkLoginRegister()">
         <div class="cotn_principal">
@@ -39,16 +40,16 @@
 
                     <div class="cont_back_info">
                         <div class="cont_img_back_grey">
-                            <img src="https://images.unsplash.com/42/U7Fc1sy5SCUDIu4tlJY3_NY_by_PhilippHenzler_philmotion.de.jpg?ixlib=rb-0.3.5&q=50&fm=jpg&crop=entropy&s=7686972873678f32efaf2cd79671673d" alt="" />
+                            <!--<img src="https://images.unsplash.com/42/U7Fc1sy5SCUDIu4tlJY3_NY_by_PhilippHenzler_philmotion.de.jpg?ixlib=rb-0.3.5&q=50&fm=jpg&crop=entropy&s=7686972873678f32efaf2cd79671673d" alt="" />-->
                         </div>
 
                     </div>
                     <div class="cont_forms" >
                         <div class="cont_img_back_">
-                            <img src="https://images.unsplash.com/42/U7Fc1sy5SCUDIu4tlJY3_NY_by_PhilippHenzler_philmotion.de.jpg?ixlib=rb-0.3.5&q=50&fm=jpg&crop=entropy&s=7686972873678f32efaf2cd79671673d" alt="" />
+                            <!--<img src="https://images.unsplash.com/42/U7Fc1sy5SCUDIu4tlJY3_NY_by_PhilippHenzler_philmotion.de.jpg?ixlib=rb-0.3.5&q=50&fm=jpg&crop=entropy&s=7686972873678f32efaf2cd79671673d" alt="" />-->
                         </div>
                         <form class="cont_form_login" action="MainController" method="POST">
-                            <a href="#" onclick="ocultar_login_sign_up()" ><i class="material-icons">&#xE5C4;</i></a>
+                            <a href="#" onclick="ocultar_login_sign_up()"><i class="material-icons">&#xE5C4;</i></a>
                             <h2>LOGIN</h2>
                             <input id="loginUsername" name="txtUsername" type="text" placeholder="Email" value="${requestScope.Username}"/>
                             <input id="loginPassword" name="txtPassword" type="password" placeholder="Password" />

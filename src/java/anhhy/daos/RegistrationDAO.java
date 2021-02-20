@@ -11,16 +11,7 @@ import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.Date;
-import java.util.Properties;
 import java.util.Random;
-import javax.mail.Authenticator;
-import javax.mail.Message;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
 import org.apache.commons.codec.digest.DigestUtils;
 
 /**
@@ -142,60 +133,6 @@ public class RegistrationDAO implements Serializable {
             closeConnection();
         }
         return check;
-    }
-
-    public int sendMail(String from, String to, String subject, String message, String code) {
-        try {
-            Properties props = System.getProperties();
-//            props.setProperty("mail.transport.protocol", "smtp");
-//            props.setProperty("mail.host", "smtp.gmail.com");
-//            // -- Attaching to default Session, or we could start a new one --
-//            props.put("mail.transport.protocol", "smtp");
-//            props.put("mail.smtp.starttls.enable", "true");
-//            props.put("mail.smtp.host", smtpServ);
-//            props.put("mail.smtp.auth", "true");
-            props.setProperty("mail.transport.protocol", "smtp");
-            props.setProperty("mail.host", "smtp.gmail.com");
-            props.put("mail.smtp.auth", "true");
-            props.put("mail.smtp.port", "465");
-            props.put("mail.debug", "true");
-            props.put("mail.smtp.socketFactory.port", "465");
-            props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-            props.put("mail.smtp.socketFactory.fallback", "false");
-            Authenticator auth = new SMTPAuthenticator();
-            Session session = Session.getInstance(props, auth);
-            // -- Create a new message --
-            Message msg = new MimeMessage(session);
-            // -- Set the FROM and TO fields --
-
-            msg.setFrom(new InternetAddress(from));
-            msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to, false));
-            msg.setSubject(subject);
-            msg.setText(message + "Please enter the following code to verify your email: " + code);
-
-            // -- Set some other header information --
-            msg.setHeader("MyMail", "Mr. XYZ");
-            msg.setSentDate(new Date());
-            // -- Send the message --
-            Transport.send(msg);
-
-            return 0;
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            return -1;
-        }
-        //khoibmse140038@fpt.edu.vn
-    }
-
-// Also include an inner class that is used for authentication purposes
-    private class SMTPAuthenticator extends javax.mail.Authenticator {
-
-        @Override
-        public PasswordAuthentication getPasswordAuthentication() {
-            String username = "mrsimple14062000@gmail.com";           // specify your email id here (sender's email id)
-            String password = "14062000danghuy";                                      // specify your password here
-            return new PasswordAuthentication(username, password);
-        }
     }
 
     public static String randoms() {

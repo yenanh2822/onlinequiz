@@ -48,7 +48,7 @@ public class QuestionDAO implements Serializable {
 
     public ArrayList<QuestionDTO> getQuestionByName(String search, int pageCount) throws Exception {
         ArrayList<QuestionDTO> result = new ArrayList<>();
-        QuestionDTO dto = null;
+        QuestionDTO dto;
         try {
             String sql = "SELECT top(20) q.IdQuestion, q.Question, q.Answer1, q.Answer2, q.Answer3, q.Answer4, q.CorrectAnswer, \n"
                     + "q.[Date], q.IdSubject, q.QuesStatus FROM Question as q\n"
@@ -83,15 +83,18 @@ public class QuestionDAO implements Serializable {
 
     public ArrayList<QuestionDTO> getQuestionByStatus(String search, int pageCount) throws Exception {
         ArrayList<QuestionDTO> result = new ArrayList<>();
-        QuestionDTO dto = null;
+        QuestionDTO dto;
         boolean questStatus;
 
-        if (search.toUpperCase().equals("ACTIVE")) {
-            questStatus = true;
-        } else if (search.toUpperCase().equals("DEACTIVE")) {
-            questStatus = false;
-        } else {
-            return result = new ArrayList<>();
+        switch (search.toUpperCase()) {
+            case "ACTIVE":
+                questStatus = true;
+                break;
+            case "DEACTIVE":
+                questStatus = false;
+                break;
+            default:
+                return result;
         }
 
         try {
@@ -128,7 +131,7 @@ public class QuestionDAO implements Serializable {
 
     public ArrayList<QuestionDTO> getQuestionBySubject(String search, int pageCount) throws Exception {
         ArrayList<QuestionDTO> result = new ArrayList<>();
-        QuestionDTO dto = null;
+        QuestionDTO dto;
         try {
             String sql = "SELECT top(20) q.IdQuestion, q.Question, q.Answer1, q.Answer2, q.Answer3, q.Answer4, q.CorrectAnswer, \n"
                     + "q.[Date], q.IdSubject, q.QuesStatus FROM Question as q\n"
@@ -165,12 +168,18 @@ public class QuestionDAO implements Serializable {
         double total = 0;
         String sql = null;
         try {
-            if (category.equals("Question Name")) {
-                sql = "Select count(Question.IdQuestion) as 'Number' From Question where Question LIKE ?";
-            } else if (category.equals("Subject")) {
-                sql = "Select count(Question.IdQuestion) as 'Number' From Question where IdSubject LIKE ?";
-            } else if (category.equals("Status")) {
-                sql = "Select count(Question.IdQuestion) as 'Number' From Question where QuesStatus = ?";
+            switch (category) {
+                case "Question Name":
+                    sql = "Select count(Question.IdQuestion) as 'Number' From Question where Question LIKE ?";
+                    break;
+                case "Subject":
+                    sql = "Select count(Question.IdQuestion) as 'Number' From Question where IdSubject LIKE ?";
+                    break;
+                case "Status":
+                    sql = "Select count(Question.IdQuestion) as 'Number' From Question where QuesStatus = ?";
+                    break;
+                default:
+                    break;
             }
             conn = DBConnection.makeConnection();
             preStm = conn.prepareStatement(sql);
@@ -263,7 +272,7 @@ public class QuestionDAO implements Serializable {
 
     public ArrayList<SubjectDTO> getSubject() throws Exception {
         ArrayList<SubjectDTO> result = new ArrayList<>();
-        SubjectDTO dto = null;
+        SubjectDTO dto;
         try {
             String sql = "SELECT IdSubject, NameSubject FROM Subject";
             conn = DBConnection.makeConnection();
@@ -459,7 +468,7 @@ public class QuestionDAO implements Serializable {
 
     public List<QuizDTO> getHistoryBySubject(String username, String subId, int pageCount) throws Exception {
         List<QuizDTO> result = new ArrayList<>();
-        QuizDTO dto = null;
+        QuizDTO dto;
         try {
             String sql = "SELECT top(5) q.Email, q.Score, q.IdQuiz, q.DoingDate, q.FinishTime FROM QuizDetail as q\n"
                     + "WHERE q.IdSubject = ? AND q.Email = ?  AND q.IdQuiz NOT IN \n"
