@@ -20,7 +20,7 @@ public class DBConnection implements Serializable {
     public static Connection makeConnection() throws Exception {
         Context context = new InitialContext();
         Context tomContext = (Context) context.lookup("java:comp/env");
-        DataSource ds = (DataSource) tomContext.lookup("SE140080");
+        DataSource ds = (DataSource) tomContext.lookup("DBCon");
         Connection conn = ds.getConnection();
         return conn;
     }
