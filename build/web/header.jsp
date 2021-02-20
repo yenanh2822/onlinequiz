@@ -1,5 +1,5 @@
 <div id="header">
-    <h1>Code Warrior</h1>
+    <h1>Online Quiz</h1>
     </div>
     <hr/>
     

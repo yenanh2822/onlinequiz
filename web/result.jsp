@@ -1,34 +1,57 @@
-<%@page import="com.UserDAO"%>
-<%@page import="com.AdminDAO"%>
+<%-- 
+    Document   : result
+    Created on : May 31, 2020, 12:31:14 PM
+    Author     : AnhHY
+--%>
 
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <html>
-<head>
-<title>Online Quiz</title>
-<link rel="stylesheet" type="text/css" href="style.css">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>JSP Page</title>
+        <link rel="stylesheet" type="text/css" href="CSS/util.css">
+        <link rel="stylesheet" type="text/css" href="CSS/mainTable.css">
+    </head>
+    <body onload="callTable()">
+        <div id="table" class="limiter">
+            <div class="container-table100">
+                <h2 style="font-size: 30px; color: #FFF"> RESULT </h2>
+                <div class="wrap-table100" style="margin-top: -500px">
+                    <div class="table100">
+                        <table>
+                            <thead>
+                                <tr class="table100-head" style="text-align: center">
+                                    <th class="column1">Subject ID</th>
+                                    <th class="column1">Subject Name</th>
+                                    <th class="column1">Correct</th>
+                                    <th class="column1">Score</th>
+                                    <th class="column1"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="text-align: center">${requestScope.SubId}</td>
+                                    <td style="text-align: center">${requestScope.SubName}</td>
+                                    <td style="text-align: center">${requestScope.NoCorrect}/${requestScope.Total}</td>
+                                    <td style="text-align: center">${requestScope.Score}</td>
+                                    <td>
+                                        <a href="quiz.jsp">Back to Home Page</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>   
+                    </div>
+                </div>
+            </div>
+        </div>
 
-</head>
-
-<body>
-
-    <script type="text/javascript">
-        window.onbeforeunload = function() { return "Warning: Your work will be lost!"; };
-    </script>
-
-    <jsp:include page="header.jsp"></jsp:include>        
-        
-    <div id="section">
-    <h2>Test Finished:</h2>
-    <ul>
-      <li>Your result is saved.</li>
-      <li>Please wait while others finish their test.</li>
-      <li>Please don't press back, close or reload this window.</li>
-    </ul>  
-    
-    <br/>
-    <h2>Happy Coding!! :) :)</h2>
-    </div>
-    
-</body>
-
+        <script>
+            function callTable() {
+                var table = document.getElementById("table");
+                table.scrollIntoView({behavior: 'smooth', block: 'center'});
+            }
+        </script>
+    </body>
 </html>

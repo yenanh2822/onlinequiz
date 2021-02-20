@@ -1,108 +1,148 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+    <filter>
+        <filter-name>RoleFilter</filter-name>
+        <filter-class>anhhy.filters.RoleFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>RoleFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
     <servlet>
         <servlet-name>MainController</servlet-name>
-        <servlet-class>anhhy.controller.MainController</servlet-class>
+        <servlet-class>anhhy.controllers.MainController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>LoginServlet</servlet-name>
-        <servlet-class>anhhy.controller.LoginServlet</servlet-class>
+        <servlet-name>RegisterController</servlet-name>
+        <servlet-class>anhhy.controllers.RegisterController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>LogoutServlet</servlet-name>
-        <servlet-class>anhhy.controller.LogoutServlet</servlet-class>
+        <servlet-name>LoginController</servlet-name>
+        <servlet-class>anhhy.controllers.LoginController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>SearchServlet</servlet-name>
-        <servlet-class>anhhy.controller.SearchServlet</servlet-class>
+        <servlet-name>ExecutorServlet</servlet-name>
+        <servlet-class>anhhy.controllers.ExecutorServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>AddCartServlet</servlet-name>
-        <servlet-class>anhhy.controller.AddCartServlet</servlet-class>
+        <servlet-name>VerifyController</servlet-name>
+        <servlet-class>anhhy.controllers.VerifyController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>DeleteCartServlet</servlet-name>
-        <servlet-class>anhhy.controller.DeleteCartServlet</servlet-class>
+        <servlet-name>LogoutController</servlet-name>
+        <servlet-class>anhhy.controllers.LogoutController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>UpdateCartServlet</servlet-name>
-        <servlet-class>anhhy.controller.UpdateCartServlet</servlet-class>
+        <servlet-name>QuestionMainController</servlet-name>
+        <servlet-class>anhhy.question_controllers.QuestionMainController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ConfirmServlet</servlet-name>
-        <servlet-class>anhhy.controller.ConfirmServlet</servlet-class>
+        <servlet-name>SearchQuestionController</servlet-name>
+        <servlet-class>anhhy.question_controllers.SearchQuestionController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>HistoryServlet</servlet-name>
-        <servlet-class>anhhy.controller.HistoryServlet</servlet-class>
+        <servlet-name>UpdateQuestionController</servlet-name>
+        <servlet-class>anhhy.question_controllers.UpdateQuestionController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>AdminSearchServlet</servlet-name>
-        <servlet-class>anhhy.controller.AdminSearchServlet</servlet-class>
+        <servlet-name>EditQuestionController</servlet-name>
+        <servlet-class>anhhy.question_controllers.EditQuestionController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>UploadServlet</servlet-name>
-        <servlet-class>anhhy.controller.UploadServlet</servlet-class>
+        <servlet-name>DeleteQuestionController</servlet-name>
+        <servlet-class>anhhy.question_controllers.DeleteQuestionController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>DeleteProductServlet</servlet-name>
-        <servlet-class>anhhy.controller.DeleteProductServlet</servlet-class>
+        <servlet-name>CreateQuestionController</servlet-name>
+        <servlet-class>anhhy.question_controllers.CreateQuestionController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>CreateServlet</servlet-name>
-        <servlet-class>anhhy.controller.CreateServlet</servlet-class>
+        <servlet-name>QuizMainController</servlet-name>
+        <servlet-class>anhhy.quiz_controllers.QuizMainController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>TakeQuizController</servlet-name>
+        <servlet-class>anhhy.quiz_controllers.TakeQuizController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>QuizController</servlet-name>
+        <servlet-class>anhhy.quiz_controllers.QuizController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ResultController</servlet-name>
+        <servlet-class>anhhy.quiz_controllers.ResultController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>QuizDetailController</servlet-name>
+        <servlet-class>anhhy.quiz_controllers.QuizDetailController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>LoginServlet</servlet-name>
-        <url-pattern>/LoginServlet</url-pattern>
+        <servlet-name>RegisterController</servlet-name>
+        <url-pattern>/RegisterController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>LogoutServlet</servlet-name>
-        <url-pattern>/LogoutServlet</url-pattern>
+        <servlet-name>LoginController</servlet-name>
+        <url-pattern>/LoginController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>SearchServlet</servlet-name>
-        <url-pattern>/SearchServlet</url-pattern>
+        <servlet-name>ExecutorServlet</servlet-name>
+        <url-pattern>/ExecutorServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>AddCartServlet</servlet-name>
-        <url-pattern>/AddCartServlet</url-pattern>
+        <servlet-name>VerifyController</servlet-name>
+        <url-pattern>/VerifyController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>DeleteCartServlet</servlet-name>
-        <url-pattern>/DeleteCartServlet</url-pattern>
+        <servlet-name>LogoutController</servlet-name>
+        <url-pattern>/LogoutController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>UpdateCartServlet</servlet-name>
-        <url-pattern>/UpdateCartServlet</url-pattern>
+        <servlet-name>QuestionMainController</servlet-name>
+        <url-pattern>/QuestionMainController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ConfirmServlet</servlet-name>
-        <url-pattern>/ConfirmServlet</url-pattern>
+        <servlet-name>SearchQuestionController</servlet-name>
+        <url-pattern>/SearchQuestionController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>HistoryServlet</servlet-name>
-        <url-pattern>/HistoryServlet</url-pattern>
+        <servlet-name>UpdateQuestionController</servlet-name>
+        <url-pattern>/UpdateQuestionController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>AdminSearchServlet</servlet-name>
-        <url-pattern>/AdminSearchServlet</url-pattern>
+        <servlet-name>EditQuestionController</servlet-name>
+        <url-pattern>/EditQuestionController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>UploadServlet</servlet-name>
-        <url-pattern>/UploadServlet</url-pattern>
+        <servlet-name>DeleteQuestionController</servlet-name>
+        <url-pattern>/DeleteQuestionController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>DeleteProductServlet</servlet-name>
-        <url-pattern>/DeleteProductServlet</url-pattern>
+        <servlet-name>CreateQuestionController</servlet-name>
+        <url-pattern>/CreateQuestionController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>CreateServlet</servlet-name>
-        <url-pattern>/CreateServlet</url-pattern>
+        <servlet-name>QuizMainController</servlet-name>
+        <url-pattern>/QuizMainController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TakeQuizController</servlet-name>
+        <url-pattern>/TakeQuizController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>QuizController</servlet-name>
+        <url-pattern>/QuizController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ResultController</servlet-name>
+        <url-pattern>/ResultController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>QuizDetailController</servlet-name>
+        <url-pattern>/QuizDetailController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
@@ -113,9 +153,13 @@
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
     <resource-ref>
-        <description>Resource reference to Connection</description>
-        <res-ref-name>DBCon</res-ref-name>
+        <res-ref-name>SE140080</res-ref-name>
         <res-type>javax.sql.DataSource</res-type>
         <res-auth>Container</res-auth>
+        <res-sharing-scope>Shareable</res-sharing-scope>
     </resource-ref>
+    <context-param>
+        <param-name>log4j-config-location</param-name>
+        <param-value>WEB-INF/log4j.properties</param-value>
+    </context-param>
 </web-app>
